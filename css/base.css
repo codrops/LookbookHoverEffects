@@ -53,7 +53,7 @@
   --card-text: #f4efe6;
 }
 
-/* 07's card is glass instead: a light veil over the photograph, which shows
+/* 07's card is glass instead: a tinted veil over the photograph, which shows
    through it frosted. */
 .demo-7 {
   --card: rgba(151, 28, 239, 0.45);
@@ -196,6 +196,27 @@ figure {
   text-underline-offset: 3px;
 }
 
+/* The sponsor line the live server adds to the frame (#cdawrap), on its own
+   row under the variations. */
+.frame #cdawrap {
+  grid-column: -2;
+  grid-row: 2;
+  justify-self: end;
+  max-width: 250px;
+  text-align: right;
+}
+
+/* The looks make room for that row (two lines and the gap), so both rows of
+   photographs still fit on the screen. */
+body:has(#cdawrap) .looks {
+  --sponsor: 3.5rem;
+}
+
+/* And for a credit at the foot (a line and its gutter). */
+body:has(.credit) .looks {
+  --credit: 3.25rem;
+}
+
 /* The lookbook ------------------------------------------------------------- */
 
 /* The label's name and the collection in a column on the left, the looks
@@ -228,10 +249,12 @@ figure {
 }
 
 /* Six 4:5 photographs, three to a row: small enough that both rows fit on
-   the screen, close together across and further apart down, so each row
-   reads as a strip. The card's type is sized to its look (cqw). */
+   the screen under the frame and above any credit (7rem is the frame's one
+   row and the gutters, 4vh the lookbook's top padding), close together
+   across and further apart down, so each row reads as a strip. The card's
+   type is sized to its look (cqw). */
 .looks {
-  --look: min(16vw, (100svh - 9rem - 2.4vw) * 0.4);
+  --look: min(16vw, (100svh - 7rem - 4vh - var(--sponsor, 0px) - var(--credit, 0px) - 2.4vw) * 0.4);
   display: grid;
   grid-template-columns: repeat(3, var(--look));
   gap: 2.4vw 1.2vw;
@@ -313,6 +336,13 @@ figure {
 
   .frame__demos {
     justify-content: start;
+  }
+
+  .frame #cdawrap {
+    grid-column: auto;
+    grid-row: auto;
+    justify-self: start;
+    text-align: left;
   }
 
   .lookbook {

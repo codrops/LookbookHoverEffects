@@ -62,7 +62,7 @@ export default function name(looks) {
 
 Each page has its own, describing its own variation: what you see when you hover, in one or two plain sentences under about 160 characters, ending with what it's made with ("A WebGL and GSAP hover effect." or "A CSS clip-path and GSAP hover effect."). The same text goes in `og:description` and `twitter:description`. Keywords say the same in tags. Write them when a variation is added, and rewrite them whenever it changes what it does or is replaced; don't wait to be asked.
 
-The analytics and sponsor scripts stay commented out in the repo; they're added on the live server only.
+The analytics and sponsor scripts stay commented out in the repo; they're added on the live server only. The sponsor line they add (`#cdawrap`, inside `.frame`) sits on the frame's second row under the variations, and the looks shrink to make room for it (`--sponsor` in `css/base.css`).
 
 ## Style
 
