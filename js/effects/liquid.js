@@ -21,11 +21,12 @@ const CONFIG = {
   size: 0.14, // the blob's radius when it gathers, as a share of the look's width
   tail: 3, // drops in its tail
   stiffness: 60, // how hard the blob is pulled after the pointer
-  damping: 11, // how quickly its wobble dies down
+  damping: 12, // how quickly its wobble dies down
   flick: 900, // CSS pixels a second the pointer must move for drops to break away
-  gather: 1.2, // how fast the liquid gathers while you hover, keeping still (it floods at 1)
+  gather: 1.2, // how fast the liquid gathers while you hover, keeping still (it floods as it nears 1)
   flow: 0.0012, // how much more it gathers for every CSS pixel a second you move
   flood: 1, // seconds for it to flood the look
+  floodEase: 'power1.inOut', // how the flood spreads: picks up from the blob's own growth, so it carries on without a pause
   drain: 0.6, // seconds for it to drain away when you leave
   gloss: 0.1, // how bright its highlight is, 0 to 1
   lens: 30, // how far its curved surface bends the picture near the rim, in CSS pixels
@@ -127,7 +128,7 @@ function liquid(look) {
   const head = { x: 0, y: 0, vx: 0, vy: 0 }; // the blob, pulled after the pointer
   let tail = []; // drops trailing the blob, each after the one before
   let loose = []; // drops flicked off, pulled back to the blob
-  let gathered = 0; // how much liquid has gathered, 0 to 1 (it floods at 1)
+  let gathered = 0; // how much liquid has gathered, 0 to 1 (it floods as it nears 1)
   let hovering = false;
   let cooldown = 0;
   const state = { presence: 0, flood: 0 }; // how much of the liquid is there (draining, 0), and how far it has flooded
@@ -144,7 +145,7 @@ function liquid(look) {
       Math.hypot(head.x, size.height - head.y),
       Math.hypot(size.width - head.x, size.height - head.y),
     );
-    const flood = gsap.parseEase('power2.inOut')(state.flood);
+    const flood = gsap.parseEase(CONFIG.floodEase)(state.flood);
     const r = gsap.utils.interpolate(base, corner * 1.6 + 20, flood) * state.presence;
     let n = 0;
     const add = (x, y, radius) => {
@@ -222,10 +223,12 @@ function liquid(look) {
       return Math.hypot(head.x - d.x, head.y - d.y) > base * 0.35;
     });
 
-    // It gathers while you hover, more as you move, and floods at 1.
-    if (hovering && !flooding) {
+    // It gathers while you hover, more as you move, up to 1. The flood sets
+    // off a little before that, while the blob is still growing, so the one
+    // runs into the other without a pause.
+    if (hovering && gathered < 1) {
       gathered = Math.min(1, gathered + dt * (CONFIG.gather + CONFIG.flow * speed));
-      if (gathered >= 1) floodIt();
+      if (gathered >= 0.85 && !flooding) floodIt();
     }
 
     draw();

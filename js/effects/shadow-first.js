@@ -18,10 +18,10 @@ import { fullscreen, overlay, program, texture, uniforms } from '../gl.js';
 import { wipe } from '../wipe.js';
 
 const CONFIG = {
-  duration: 1.2, // seconds for the colour to cross the look
+  duration: 0.8, // seconds for the colour to cross the look
   ease: 'power1.out', // sets off at once, slowing as it reaches the highlights
-  pull: 0.35, // how far ahead of the sweep the shadows fill, as a share of the look (0: a straight wipe)
-  light: 0.9, // how bright the hairline of light along the edge is, 0 to 1
+  pull: 0.75, // how far ahead of the sweep the shadows fill, as a share of the look (0: a straight wipe)
+  light: 0.2, // how bright the hairline of light along the edge is, 0 to 1
 };
 
 const fragment = `#version 300 es
