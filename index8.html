@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lookbook Hover Effects | Demo 8 | Codrops</title>
+    <meta name="description" content="Hover a photograph and it changes like a channel, in flickering bands of its own scrambled colours that settle into a card. A WebGL and GSAP hover effect." />
+    <meta name="keywords" content="hover effect, image hover, image grid, WebGL, GLSL shaders, GSAP" />
+    <link rel="canonical" href="https://tympanus.net/Demos/LookbookHoverEffects/index8.html" />
+    <meta name="theme-color" content="#0f0e0e" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Codrops" />
+    <meta property="og:title" content="Lookbook Hover Effects | Demo 8 | Codrops" />
+    <meta property="og:description" content="Hover a photograph and it changes like a channel, in flickering bands of its own scrambled colours that settle into a card. A WebGL and GSAP hover effect." />
+    <meta property="og:url" content="https://tympanus.net/Demos/LookbookHoverEffects/index8.html" />
+    <meta property="og:image" content="https://tympanus.net/Demos/LookbookHoverEffects/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="A lookbook grid of six portraits in cobalt, one of them half covered by a cobalt card reading Look 02, its edge jagged along the photograph’s shadows" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@codrops" />
+    <meta name="twitter:title" content="Lookbook Hover Effects | Demo 8 | Codrops" />
+    <meta name="twitter:description" content="Hover a photograph and it changes like a channel, in flickering bands of its own scrambled colours that settle into a card. A WebGL and GSAP hover effect." />
+    <meta name="twitter:image" content="https://tympanus.net/Demos/LookbookHoverEffects/og-image.jpg" />
+    <meta name="twitter:image:alt" content="A lookbook grid of six portraits in cobalt, one of them half covered by a cobalt card reading Look 02, its edge jagged along the photograph’s shadows" />
+    <link rel="icon" type="image/svg+xml" href="https://tympanus.net/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="https://tympanus.net/favicon/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600&display=swap" />
+    <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <script>
+      document.documentElement.className = 'js';
+    </script>
+    <!-- Added on the live server only, leave commented out in the repo -->
+    <!--script src="//tympanus.net/codrops/adpacks/analytics.js"></script-->
+  </head>
+
+  <body class="demo-8 loading" data-effect="channel">
+    <header class="frame">
+      <h1 class="frame__title">Lookbook Hover Effects</h1>
+      <nav class="frame__links" aria-label="Demo links">
+        <a href="https://tympanus.net/codrops/hub/">All demos</a>
+        <a href="https://github.com/codrops/LookbookHoverEffects">GitHub</a>
+      </nav>
+      <nav class="frame__tags" aria-label="Tags">
+        <a href="https://tympanus.net/codrops/hub/tag/hover/">#hover</a>
+        <a href="https://tympanus.net/codrops/hub/tag/webgl/">#webgl</a>
+        <a href="https://tympanus.net/codrops/hub/tag/glsl/">#glsl</a>
+        <a href="https://tympanus.net/codrops/hub/tag/gsap/">#gsap</a>
+      </nav>
+      <nav class="frame__demos" aria-label="Variations">
+        <span class="frame__demos-label">Variations</span>
+        <a class="frame__demo" href="index.html">01</a>
+        <a class="frame__demo" href="index2.html">02</a>
+        <a class="frame__demo" href="index3.html">03</a>
+        <a class="frame__demo" href="index4.html">04</a>
+        <a class="frame__demo" href="index5.html">05</a>
+        <a class="frame__demo" href="index6.html">06</a>
+        <a class="frame__demo" href="index7.html">07</a>
+        <span class="frame__demo frame__demo--current" aria-current="page">08</span>
+      </nav>
+    </header>
+    <main class="lookbook">
+      <div class="lookbook__head">
+        <h2 class="lookbook__brand">Ostrel</h2>
+        <p class="lookbook__meta">Autumn–Winter 2026<br />Moss</p>
+      </div>
+      <ul class="looks">
+        <li>
+          <figure class="look">
+            <img class="look__img" src="img/08/1.webp" width="960" height="1200" alt="Model with a curly fringe in profile, eyes closed, in an olive field jacket over a moss knit" />
+            <figcaption class="look__card">
+              <span class="look__label">Look</span>
+              <span class="look__num">01</span>
+              <span class="look__pieces">Field jacket<br />Moss knit</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="look">
+            <img class="look__img" src="img/08/2.webp" width="960" height="1200" alt="Model with long hair tied back seated on a plinth in an olive parka and khaki trousers" />
+            <figcaption class="look__card">
+              <span class="look__label">Look</span>
+              <span class="look__num">02</span>
+              <span class="look__pieces">Utility parka<br />Khaki trousers</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="look">
+            <img class="look__img" src="img/08/3.webp" width="960" height="1200" alt="Model with a shaved head, arms out, in an olive parka over a chunky knit" />
+            <figcaption class="look__card">
+              <span class="look__label">Look</span>
+              <span class="look__num">03</span>
+              <span class="look__pieces">Field parka<br />Chunky knit</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="look">
+            <img class="look__img" src="img/08/4.webp" width="960" height="1200" alt="Model with close-cropped hair in a moss funnel-neck knit under an olive jacket, looking away" />
+            <figcaption class="look__card">
+              <span class="look__label">Look</span>
+              <span class="look__num">04</span>
+              <span class="look__pieces">Funnel-neck knit<br />Olive jacket</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="look">
+            <img class="look__img" src="img/08/5.webp" width="960" height="1200" alt="Model with wavy hair facing the camera in an olive field jacket over a moss rollneck" />
+            <figcaption class="look__card">
+              <span class="look__label">Look</span>
+              <span class="look__num">05</span>
+              <span class="look__pieces">Field jacket<br />Rollneck</span>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="look">
+            <img class="look__img" src="img/08/6.webp" width="960" height="1200" alt="Model with long braids in profile, in dark sunglasses, a silver earring and an olive jacket with a knit collar" />
+            <figcaption class="look__card">
+              <span class="look__label">Look</span>
+              <span class="look__num">06</span>
+              <span class="look__pieces">Olive jacket<br />Knit collar</span>
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
+    </main>
+    <script src="js/gsap.min.js"></script>
+    <script type="module" src="js/index.js"></script>
+    <!-- Added on the live server only, leave commented out in the repo -->
+    <!--script src="https://tympanus.net/codrops/adpacks/cda_sponsor.js"></script-->
+  </body>
+</html>

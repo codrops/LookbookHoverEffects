@@ -1,0 +1,330 @@
+/* Lookbook Hover Effects · the page frame, the lookbook, and the card each effect wipes in. */
+
+/* Nyght Serif (Maksym Kobuzan, SIL OFL: fonts/OFL.txt) for the label's name
+   and the look numbers. */
+@font-face {
+  font-family: 'Nyght Serif';
+  src: url('../fonts/NyghtSerif-Light.otf') format('opentype');
+  font-weight: 300;
+  font-display: block;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0f0e0e;
+  --text: #f1ece4;
+  --card: #2340a3;
+  --card-text: #f4efe6;
+  --font: 'Inter Tight', system-ui, sans-serif;
+  --display: 'Nyght Serif', Georgia, serif;
+  --gutter: 24px;
+  font-size: 13px;
+}
+
+/* Each variation is its own series of photographs, and its card takes a
+   colour from them (01's is the default above). */
+.demo-2 {
+  --card: #2c675f;
+  --card-text: #f4efe6;
+}
+
+.demo-3 {
+  --card: #5c1822;
+  --card-text: #f4efe6;
+}
+
+.demo-4 {
+  --card: #e0ca76;
+  --card-text: #24200f;
+}
+
+.demo-5 {
+  --card: #55407f;
+  --card-text: #f4efe6;
+}
+
+.demo-6 {
+  --card: #a0141e;
+  --card-text: #f4efe6;
+}
+
+/* 07's card is glass instead: a light veil over the photograph, which shows
+   through it frosted. */
+.demo-7 {
+  --card: rgba(151, 28, 239, 0.45);
+  --card-text: #231d1f;
+}
+
+.demo-8 {
+  --card: #3b4a24;
+  --card-text: #f4efe6;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+/* The frame at the top, the lookbook, and any credit at the foot of the
+   screen. */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p,
+h1,
+h2,
+ul,
+figure {
+  margin: 0;
+}
+
+/* Until the fonts and photographs are in: a hairline bar, then the page. */
+.js .loading::before,
+.js .loading::after {
+  content: '';
+  position: fixed;
+  z-index: 1000;
+}
+
+.js .loading::before {
+  inset: 0;
+  background: var(--bg);
+}
+
+.js .loading::after {
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 1px;
+  margin-left: -60px;
+  background: var(--text);
+  transform-origin: 0 50%;
+  animation: loading 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes loading {
+  from {
+    transform: scaleX(0.1);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Frame ------------------------------------------------------------------ */
+
+.frame {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  gap: 8px 32px;
+  align-items: start;
+  padding: var(--gutter);
+}
+
+.frame__title {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.frame__links,
+.frame__tags {
+  display: flex;
+  gap: 12px;
+}
+
+.frame__links a:hover,
+.frame__tags a:hover,
+.frame__demo:hover,
+.credit a:hover {
+  opacity: 0.6;
+}
+
+/* Where a variation is based on someone else's effect, a note at the foot
+   of the screen, set like the demo's title. */
+.credit {
+  margin: 0;
+  padding: 0 var(--gutter) var(--gutter);
+  font-size: 1rem;
+}
+
+.credit a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.frame__tags {
+  opacity: 0.6;
+}
+
+/* The variations, numbered. */
+.frame__demos {
+  display: grid;
+  grid-template-columns: auto repeat(8, auto);
+  gap: 2px 10px;
+  justify-content: end;
+}
+
+.frame__demos-label {
+  opacity: 0.6;
+}
+
+.frame__demo {
+  font-variant-numeric: tabular-nums;
+}
+
+.frame__demo--current {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* The lookbook ------------------------------------------------------------- */
+
+/* The label's name and the collection in a column on the left, the looks
+   on the right: the name at the top, the collection at the foot, level
+   with the last row. */
+.lookbook {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-content: start;
+  gap: var(--gutter);
+  padding: 4vh var(--gutter) var(--gutter);
+}
+
+.lookbook__head {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.lookbook__brand {
+  font-size: clamp(56px, 11vw, 168px);
+  font-family: var(--display);
+  font-weight: 300;
+  line-height: 0.8;
+}
+
+.lookbook__meta {
+  opacity: 0.6;
+}
+
+/* Six 4:5 photographs, three to a row: small enough that both rows fit on
+   the screen, close together across and further apart down, so each row
+   reads as a strip. The card's type is sized to its look (cqw). */
+.looks {
+  --look: min(16vw, (100svh - 9rem - 2.4vw) * 0.4);
+  display: grid;
+  grid-template-columns: repeat(3, var(--look));
+  gap: 2.4vw 1.2vw;
+  padding: 0;
+  list-style: none;
+}
+
+.look {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  container-type: inline-size;
+}
+
+.look__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The card the effect brings in over the photograph, cut down to nothing
+   until then. The WebGL effects paint it from this layout onto their canvas
+   and leave it cut; 03 uncovers it by setting its clip-path. Screen readers
+   read it here either way. */
+.look__card {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 7cqw;
+  background: var(--card);
+  color: var(--card-text);
+  clip-path: polygon(0 0, 0 0, 0 0);
+}
+
+/* Without JavaScript or WebGL 2, the card simply shows on hover. */
+.no-js .look:hover .look__card,
+.plain .look:hover .look__card {
+  clip-path: none;
+}
+
+/* 07's effect frosts the photograph itself; without it, the browser does. */
+.no-js .demo-7 .look__card,
+.plain .demo-7 .look__card {
+  backdrop-filter: blur(8px);
+}
+
+/* The effect's canvas, over the photograph. */
+.look__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.look__num {
+  font-size: 38cqw;
+  font-family: var(--display);
+  font-weight: 300;
+  line-height: 0.8;
+  margin-top: 2cqw;
+}
+
+.look__pieces {
+  margin-top: auto;
+}
+
+/* Smaller screens ---------------------------------------------------------- */
+
+@media (max-width: 760px) {
+  :root {
+    --gutter: 16px;
+  }
+
+  .frame {
+    grid-template-columns: 1fr;
+  }
+
+  .frame__demos {
+    justify-content: start;
+  }
+
+  .lookbook {
+    grid-template-columns: 1fr;
+  }
+
+  .lookbook__head {
+    gap: 12px;
+  }
+
+  .looks {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
