@@ -15,7 +15,7 @@ Notes for coding agents working on this repo. Read [README.md](README.md) first 
 | -------------------- | ---------- |
 | `index.html`         | Variation 01: the frame, the lookbook head and the six looks, in two rows of three.               |
 | `index2.html` … `index8.html` | Variations 02 to 08: the same page, with their own `data-effect`.                   |
-| `js/index.js`        | The registry of effects by name (each loaded with `import()` only on its page), the loader, start-up. |
+| `js/index.js`        | The registry of effects by name (each loaded with `import()` only on its page), the loader, start-up, and the live sponsor line's move out of the frame. |
 | `js/effects/*.js`    | One effect per file.                                                                              |
 | `js/wipe.js`         | The two shared hovers, `wipe()` and `toggle()`, and the helpers: `motion`, `sweeps`, `locate()`, `inward()`, `corner`. |
 | `js/photo.js`        | A photograph's tones and a Gaussian blur, on the CPU, for 04 and 06.                              |
@@ -62,7 +62,7 @@ export default function name(looks) {
 
 Each page has its own, describing its own variation: what you see when you hover, in one or two plain sentences under about 160 characters, ending with what it's made with ("A WebGL and GSAP hover effect." or "A CSS clip-path and GSAP hover effect."). The same text goes in `og:description` and `twitter:description`. Keywords say the same in tags. Write them when a variation is added, and rewrite them whenever it changes what it does or is replaced; don't wait to be asked.
 
-The analytics and sponsor scripts stay commented out in the repo; they're added on the live server only. The sponsor line they add (`#cdawrap`, inside `.frame`) sits on the frame's second row under the variations, and the looks shrink to make room for it (`--sponsor` in `css/base.css`).
+The analytics and sponsor scripts stay commented out in the repo; they're added on the live server only. The sponsor script adds an empty box to `.frame` and fills it with the sponsor line (`#cdawrap`) once that loads; `js/index.js` moves the box into `.lookbook__head` while it's still empty, so the line comes in at the foot of the label's column, level with the last row (after the looks on phones), and nothing on the page moves when it arrives.
 
 ## Style
 

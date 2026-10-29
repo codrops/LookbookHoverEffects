@@ -196,32 +196,10 @@ figure {
   text-underline-offset: 3px;
 }
 
-/* The sponsor line the live server adds to the frame (#cdawrap), on its own
-   row under the variations. */
-.frame #cdawrap {
-  grid-column: -2;
-  grid-row: 2;
-  justify-self: end;
-  max-width: 250px;
-  text-align: right;
-}
-
-/* The looks make room for that row (two lines and the gap), so both rows of
-   photographs still fit on the screen. */
-body:has(#cdawrap) .looks {
-  --sponsor: 3.5rem;
-}
-
-/* And for a credit at the foot (a line and its gutter). */
-body:has(.credit) .looks {
-  --credit: 3.25rem;
-}
-
 /* The lookbook ------------------------------------------------------------- */
 
 /* The label's name and the collection in a column on the left, the looks
-   on the right: the name at the top, the collection at the foot, level
-   with the last row. */
+   on the right: the name at the top with the collection under it. */
 .lookbook {
   flex: 1;
   display: grid;
@@ -234,7 +212,18 @@ body:has(.credit) .looks {
 .lookbook__head {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* The sponsor line the live server adds to the frame (#cdawrap), which
+   js/index.js moves to the foot of that column, level with the last row:
+   space that's empty anyway, so nothing moves when it comes in. */
+.lookbook #cdawrap {
+  grid-area: auto;
+  justify-self: start;
+  max-width: 250px;
+  margin-top: auto;
+  text-align: left;
 }
 
 .lookbook__brand {
@@ -254,12 +243,17 @@ body:has(.credit) .looks {
    across and further apart down, so each row reads as a strip. The card's
    type is sized to its look (cqw). */
 .looks {
-  --look: min(16vw, (100svh - 7rem - 4vh - var(--sponsor, 0px) - var(--credit, 0px) - 2.4vw) * 0.4);
+  --look: min(16vw, (100svh - 7rem - 4vh - var(--credit, 0px) - 2.4vw) * 0.4);
   display: grid;
   grid-template-columns: repeat(3, var(--look));
   gap: 2.4vw 1.2vw;
   padding: 0;
   list-style: none;
+}
+
+/* Room for a credit at the foot (a line and its gutter). */
+body:has(.credit) .looks {
+  --credit: 3.25rem;
 }
 
 .look {
@@ -338,19 +332,18 @@ body:has(.credit) .looks {
     justify-content: start;
   }
 
-  .frame #cdawrap {
-    grid-column: auto;
-    grid-row: auto;
-    justify-self: start;
-    text-align: left;
-  }
-
   .lookbook {
     grid-template-columns: 1fr;
   }
 
+  /* The label's name and the collection above the looks, and the sponsor
+     line after the looks, where it moves nothing either. */
   .lookbook__head {
-    gap: 12px;
+    display: contents;
+  }
+
+  .lookbook #cdawrap {
+    order: 1;
   }
 
   .looks {
