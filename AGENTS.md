@@ -55,7 +55,7 @@ export default function name(looks) {
 1. Write `js/effects/<name>.js`, with `wipe()` for the hover if the card comes in between two edges from the pointer's side, or `toggle()` if it comes in the same way from any side (and `overlay()` and `paint()` if it draws on a canvas), then add `'<name>': () => import('./effects/<name>.js')` to `effects` in `js/index.js`. Don't import effects statically; each page loads only its own.
 2. Copy `index.html` to `index<N>.html` and change `data-effect`, the `demo-<N>` body class, the `Demo <N>` title (in `<title>`, `og:title` and `twitter:title`), the `canonical` and `og:url` (to `https://tympanus.net/Demos/LookbookHoverEffects/index<N>.html`), and the meta description and keywords (see below). Each variation has its own series of six photographs in `img/<NN>/`, its series name in `.lookbook__meta`, and its card colours in `css/base.css` (`.demo-<N> { --card; --card-text }`, taken from its photographs; 07's card is a see-through veil, since its effect shows the photograph frosted under it).
 3. Add the link to the `.frame__demos` nav on **every** page, and widen its `grid-template-columns` in `css/base.css`. The current page's entry is a `<span class="frame__demo frame__demo--current">`, not a link.
-4. Add a row to the README's table, and a line under "How it works".
+4. Update the README's opening lines: the number of effects, and the ways the card takes over a photograph.
 5. If the variation is based on someone else's effect, add a `<p class="credit">Based on … <a href="…">…</a></p>` after `</main>` on its page (as on `index3.html`), and a credit in the README.
 
 ## Meta description and keywords
